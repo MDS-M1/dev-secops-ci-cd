@@ -6,16 +6,18 @@ on:
 jobs:
   Tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install NodeJS
         uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
       - name: Launch tests
-        run: |
-          cd src
-          npm i
-          npm test
+        run: npm test
 
   Build:
     needs:
