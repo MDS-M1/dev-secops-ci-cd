@@ -21,7 +21,7 @@ jobs:
       - name: Create Docker Images and Push
         uses: docker/build-push-action@v4
         with:
-          file: .docker/prod/Dockerfile
+          file: docker/prod/Dockerfile
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
