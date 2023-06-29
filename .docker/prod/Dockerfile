@@ -3,8 +3,8 @@ FROM node:alpine
 RUN apk update && apk upgrade --no-cache && apk add --no-cache curl
 WORKDIR /app
 
-COPY ./src ./app
-RUN npm i
+COPY ./src /app
+RUN npm i --ignore-script
 USER node
 
 
