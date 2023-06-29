@@ -9,8 +9,15 @@ app.get('/', (req, res) => {
     res.send('Hello world!');
 });
 
-app.listen(port, () => {
+let server; // Declare server variable outside of the app.listen function
+
+server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-module.exports = app;
+module.exports = {
+    app,
+    closeServer: () => {
+        server.close();
+    }
+};
