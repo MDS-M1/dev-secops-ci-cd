@@ -3,7 +3,7 @@ FROM node:alpine
 RUN apk update && apk upgrade --no-cache && apk add --no-cache curl
 
 WORKDIR /app
-COPY --chown=node:node / /app
+COPY --chown=node:node /src /app
 RUN npm i
 
 EXPOSE 80
