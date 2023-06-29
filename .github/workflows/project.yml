@@ -11,8 +11,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Install NodeJS
         uses: actions/setup-node@v3
+      - name: Go to source folder
+        run: cd src
+      - name: Install dependencies
+        run: npm i
       - name: Launch tests
-        run: cd src && npm run test
+        run: npm run test
 
   Build:
     needs:
