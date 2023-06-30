@@ -6,7 +6,13 @@
 
 ## Description
 
-TODO
+This repository provides a robust and secure user authentication system built using Node.js, Express, and PostgreSQL. It enables users to register and login to an application by securely storing their credentials in a PostgreSQL database hosted on Amazon RDS.
+
+*Key Features:*
+
+- User Registration: The repository includes a user registration functionality that allows new users to create an account by providing their desired username and password. The registration process includes password hashing and salting techniques to ensure the security of user credentials.
+- User Login: Registered users can securely log in to the application using their credentials. The repository handles the authentication process by verifying the entered username and password against the stored values in the PostgreSQL database.
+- Database Integration: The repository seamlessly integrates with a PostgreSQL database hosted on Amazon RDS. It utilizes the PostgreSQL driver for Node.js to establish a connection and execute database operations efficiently. The database schema includes tables for storing user information, such as usernames and hashed passwords.
 
 ## How it works
 
@@ -33,10 +39,12 @@ POSTGRESQL_DB=postgres
 ### Launch application
 
 ```shell
-docker run -d -p 80:8080 remirubis/devops-ci-cd:latest
+docker run -d -p 80:8080 -n auth_app remirubis/devops-ci-cd:latest
 ```
 
 ### More commands
+
+- See 
 
 *This steps is done by CI/CD*
 
