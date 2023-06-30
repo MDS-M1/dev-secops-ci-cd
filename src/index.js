@@ -15,15 +15,35 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 const db = require("./models");
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+
+if (process.env.NODE_ENV !== 'production') {
+  db.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync db.");
+  });
+} else {
+  db.sequelize.authenticate().then(() => {
+    console.log("Connected to the database!");
+  })
+    .catch(err => {
+      console.log("Cannot connect to the database!", err);
+      process.exit();
+    });
+  db.sequelize.sync()
+}
+
 
 // Routes
 const user = require('./routes/user.routes')
 app.use('/api/user', user)
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
+let server = app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = {
+  app,
+  closeServer: () => {
+    server.close();
+  }
+};
