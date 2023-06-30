@@ -3,6 +3,13 @@ on:
   push:
     branches:
       - main
+
+env:
+  POSTGRESQL_DB_HOST: ${{ secrets.POSTGRESQL_DB_HOST }}
+  POSTGRESQL_DB_USER: ${{ secrets.POSTGRESQL_DB_USER }}
+  POSTGRESQL_DB_PASSWORD: ${{ secrets.POSTGRESQL_DB_PASSWORD }}
+  POSTGRESQL_DB: ${{ secrets.POSTGRESQL_DB }}
+
 jobs:
   Tests:
     runs-on: ubuntu-latest
