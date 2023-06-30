@@ -4,7 +4,6 @@ module.exports = {
     PASSWORD: process.env.POSTGRESQL_DB_PASSWORD,
     DB: process.env.POSTGRESQL_DB,
     dialect: "postgres",
-    // declaring pool is optional
     pool: {
       max: 5,
       min: 0,
