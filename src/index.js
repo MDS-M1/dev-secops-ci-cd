@@ -1,23 +1,49 @@
-const express = require('express');
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+require('dotenv').config()
 
 const app = express();
-const port = 8080;
-
 app.disable("x-powered-by");
 
-app.get('/', (req, res) => {
-    res.send('Hello world!');
-});
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-let server; // Declare server variable outside of the app.listen function
+const corsOptions = {
+  origin: ['http://127.0.0.1:8080']
+}
+app.use(cors(corsOptions))
 
-server = app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+const db = require("./models");
+
+if (process.env.NODE_ENV !== 'production') {
+  db.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync db.");
+  });
+} else {
+  db.sequelize.authenticate().then(() => {
+    console.log("Connected to the database!");
+  })
+    .catch(err => {
+      console.log("Cannot connect to the database!", err);
+      process.exit();
+    });
+  db.sequelize.sync()
+}
+
+
+// Routes
+const user = require('./routes/user.routes')
+app.use('/api/user', user)
+
+const PORT = process.env.PORT || 3000;
+let server = app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 module.exports = {
-    app,
-    closeServer: () => {
-        server.close();
-    }
+  app,
+  closeServer: () => {
+    server.close();
+  }
 };
