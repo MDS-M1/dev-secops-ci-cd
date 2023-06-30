@@ -39,12 +39,12 @@ POSTGRESQL_DB=postgres
 ### Launch application
 
 ```shell
-docker run -d -p 80:8080 -n auth_app remirubis/devops-ci-cd:latest
+docker run -d -p 80:8080 --name auth_app --rm remirubis/devops-ci-cd:latest
 ```
 
 ### More commands
 
-- See 
+- See logs of container
 
 *This steps is done by CI/CD*
 
@@ -59,3 +59,13 @@ docker build -f ./docker/prod/Dockerfile -t remirubis/devops-ci-cd:latest .
 ```shell
 docker push remirubis/devops-ci-cd:latest
 ```
+
+## Security and maintainability
+
+- [codeclimate.com](https://codeclimate.com/github/MDS-M1/dev-secops-ci-cd)
+
+[Screenshot-2023-06-30-at-16-49-56.png](https://postimg.cc/wtxrLzx0)
+
+- [sonarcloud.io](https://sonarcloud.io/summary/overall?id=MDS-M1_dev-secops-ci-cd)
+
+[Screenshot-2023-06-30-at-16-50-33.png](https://postimg.cc/dLBmdy7c)
