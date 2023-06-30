@@ -4,7 +4,7 @@ const { app, closeServer } = require('../index');
 describe('User', () => {
   beforeAll(async () => {
     // Wait database connection before start tests
-    await new Promise(res => setTimeout(res, 500));
+    await new Promise(res => setTimeout(res, 2000));
   });
 
   afterAll(() => {
